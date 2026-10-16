@@ -15,6 +15,7 @@ db_config = {
 @app.route('/', methods=['GET', 'POST'])
 def index():
     results = None
+    connection = None
     if request.method == 'POST':
         query = request.form['query']
         try:
@@ -25,7 +26,8 @@ def index():
         except Exception as e:
             results = [{'error': str(e)}]
         finally:
-            connection.close()
+            if connection is not None:
+                connection.close()
     return render_template('index.html', results=results)
 
 if __name__ == '__main__':
