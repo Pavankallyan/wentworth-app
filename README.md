@@ -24,3 +24,13 @@ pytest tests/ -v
 ## Tests and CI
 GitHub Actions runs `python -m py_compile app.py` and `pytest tests/` on
 every push and pull request to `main` (see `.github/workflows/ci.yml`).
+
+## Make shortcuts
+The `Makefile` wraps the common commands (override `PY` or `VENV` if needed):
+
+```bash
+make setup   # create .venv and install dependencies
+make test    # run the pytest suite (DB is mocked, no MySQL needed)
+make run     # start the Flask dev server on http://127.0.0.1:5000
+make clean   # remove the virtual environment and caches
+```
